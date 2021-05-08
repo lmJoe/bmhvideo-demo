@@ -3,7 +3,7 @@ export default{
     userId:state => state.userId,
     token:state => state.token,
     productId:state => state.productId,
-    orderNo:state => state.orderNo,
-    apptype:state => state.apptype,
+    videoId:state => state.videoId,
+    channelType:state => state.channelType,
     operdir:state => state.operdir,
 }

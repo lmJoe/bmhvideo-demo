@@ -20,6 +20,7 @@
     "swiper": "^3.4.2",
     "vue": "^2.5.2",
     "vue-router": "^3.5.1",
+    "vue-scroller": "^2.2.4",
     "vue-seamless-scroll": "^1.1.23",
     "vue-touch": "^2.0.0-beta.4",
     "vuex": "^3.6.2"

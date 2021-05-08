@@ -1,16 +1,28 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/view/index'
-
 Vue.use(Router)
-
 export default new Router({
-  mode:'hash',
+  mode:'history',
   routes: [
     {
       path: '/',
-      name: 'index',
-      component: index
+      redirect: 'welcome',
+      component: resolve=>(require(["@/view/welcome"],resolve)),
+    },
+    {
+      path: '/welcome',
+      name: 'welcome',
+      component: resolve=>(require(["@/view/welcome"],resolve)),
+    },
+    {
+      path: '/list',
+      name: 'list',
+      component: resolve=>(require(["@/view/list"],resolve)),
+    },
+    {
+      path: '/playpage',
+      name: 'playPage',
+      component: resolve=>(require(["@/view/playpage"],resolve)),
     }
   ]
 })

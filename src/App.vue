@@ -1,38 +1,12 @@
 <template>
   <div id="app">
-    <v-nav ref='goodslist'></v-nav>
-    <v-swiper @pf="parent"></v-swiper>
+    <router-view class="" v-if="$route.meta.keepAlive != true"/>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-  import nav from './components/nav/nav.vue';
-  import swiper from './components/swiper/swiper.vue';
-
+<script>
   export default {
-    components: {
-      'v-nav': nav,
-      'v-swiper': swiper
-    },
-    data() {
-      return {
-        
-      }
-    },
-    mounted() {
-      // debugger
-      if(this.$store.state.apptype==''){
-        this.$store.dispatch('setAppType','recommend');
-        this.$router.push(this.$store.state.apptype);
-      }else{
-        this.$router.push(this.$store.state.apptype);
-      }
-    },
-    methods: {
-      parent(){
-				this.$refs.goodslist.getdetailpage()
-			}
-    }
+    name: 'App'
   }
 </script>
 

@@ -7,8 +7,8 @@ function loadLocal() {
     userId:'',
     token:'',
     productId:'',
-    orderNo:'',
-    apptype:'',
+    videoId:'',
+    channelType:'',
     operdir:'',
   }
   

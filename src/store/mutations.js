@@ -1,4 +1,4 @@
-import { SET_USERID, SET_TOKEN, SET_PRODUCTID, SET_ORDERNO,SET_APPTYPE,SET_OPERDIR} from './mutation-types';
+import { SET_USERID, SET_TOKEN, SET_PRODUCTID, SET_VIDEOID,SET_CHANNELTYPE,SET_OPERDIR} from './mutation-types';
 export default {
   //获取用户数据
   [SET_USERID](state,{userId}){
@@ -22,18 +22,18 @@ export default {
       state.productId = {};
     }
   },
-  [SET_ORDERNO](state,{orderNo}){
-    if(orderNo){
-      state.orderNo = orderNo
+  [SET_VIDEOID](state,{videoId}){
+    if(videoId){
+      state.videoId = videoId
     }else{
-      state.orderNo = {};
+      state.videoId = {};
     }
   },
-  [SET_APPTYPE](state,{apptype}){
-    if(apptype){
-      state.apptype = apptype
+  [SET_CHANNELTYPE](state,{channelType}){
+    if(channelType){
+      state.channelType = channelType
     }else{
-      state.apptype = {};
+      state.channelType = {};
     }
   },
   [SET_OPERDIR](state,{operdir}){
