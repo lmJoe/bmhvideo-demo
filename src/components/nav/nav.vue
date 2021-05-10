@@ -12,7 +12,7 @@
     </div>
     <div class="swiper-container nav-list">
         <ul class="swiper-wrapper item">
-            <li class="swiper-slide" v-for="(item,index) in navList" :key="index" :class="{'active': nowIndex === item.id}" @click="tabClick(item.id)"><a href="javascript:;">{{item.name}}</a></li>
+            <li class="swiper-slide" v-for="(item,index) in navList" :key="index" :class="{'active': nowIndex == item.id}" @click="tabClick(item.id)"><a href="javascript:;">{{item.name}}</a></li>
         </ul>
     </div>
   </div>
@@ -25,32 +25,32 @@ import '../../../static/swiper.min.css';
     data() {
       return {
         navList: [
-          {name: '推荐',path:'recommend',id:0},
-          {name: '影视',path:'yingshi',id:2},
-          {name: '音乐',path:'yinyue',id:3},
-          {name: 'VLOG',path:'vlog',id:4},
+          {name: '推荐',path:'recommend',id:1},
+          {name: '影视',path:'yingshi',id:568},
+          {name: '音乐',path:'yinyue',id:504},
+          {name: 'VLOG',path:'vlog',id:108},
           {name: '游戏',path:'youxi',id:5},
-          {name: '搞笑',path:'gaoxiao',id:6},
-          {name: '综艺',path:'zongyi',id:7},
-          {name: '娱乐',path:'yule',id:8},
-          {name: '动漫',path:'dongman',id:9},
-          {name: '生活',path:'shenghuo',id:101},
-          {name: '广场舞',path:'guangchangwu',id:23},
-          {name: '美食',path:'meishi',id:12},
-          {name: '宠物',path:'chongwu',id:143},
-          {name: '三农',path:'sannong',id:67},
-          {name: '军事',path:'junshi',id:98},
-          {name: '社会',path:'shehui',id:44},
-          {name: '体育',path:'tiyu',id:64},
-          {name: '科技',path:'keji',id:123},
-          {name: '时尚',path:'shishang',id:0},
-          {name: '汽车',path:'qiche',id:321},
-          {name: '亲子',path:'qinzi',id:445},
-          {name: '文化',path:'wenhua',id:567},
-          {name: '旅游',path:'lvyou',id:35},
-          {name: '秒懂',path:'miaodong',id:24},
+          {name: '搞笑',path:'gaoxiao',id:510},
+          {name: '综艺',path:'zongyi',id:856},
+          {name: '娱乐',path:'yule',id:654},
+          {name: '动漫',path:'dongman',id:897},
+          {name: '生活',path:'shenghuo',id:222},
+          {name: '广场舞',path:'guangchangwu',id:78},
+          {name: '美食',path:'meishi',id:36},
+          {name: '宠物',path:'chongwu',id:655},
+          {name: '三农',path:'sannong',id:285},
+          {name: '军事',path:'junshi',id:398},
+          {name: '社会',path:'shehui',id:125},
+          {name: '体育',path:'tiyu',id:17},
+          {name: '科技',path:'keji',id:55},
+          {name: '时尚',path:'shishang',id:205},
+          {name: '汽车',path:'qiche',id:115},
+          {name: '亲子',path:'qinzi',id:189},
+          {name: '文化',path:'wenhua',id:43},
+          {name: '旅游',path:'lvyou',id:29},
+          {name: '秒懂',path:'miaodong',id:9},
         ],
-        nowIndex: 0,
+        nowIndex: 1,
         lotterylistBg:require("../../assets/images/header-logo.jpg"),
         searchImg:require("../../assets/images/search.png"),
       }
@@ -59,22 +59,19 @@ import '../../../static/swiper.min.css';
       this.mySwiper = new Swiper('.nav-list', {
         slidesPerView:5,
         paginationClickable: true,
-        
       });
       this.$nextTick(() => {
         // 初始化，保证刷新页面后内容区和导航键一致
         this.initPage();
       });
       // 接收swiper组件发射的index进行导航按钮切换高亮和更新模板地址
-      
     },
     methods: {
       initPage() {
         var navList = this.navList;
         for(var i=0;i<navList.length;i++){
-          this.nowIndex = this.$route.path;
-          if(this.$route.path === navList[i].path){
-            // router.push(href);
+          if(navList[i].id == this.common.getCaption(window.location.href)){
+            this.nowIndex = this.common.getCaption(window.location.href);
           }
         }
       },
@@ -82,40 +79,27 @@ import '../../../static/swiper.min.css';
         // 点击导航按钮时向swiper组件发射index
         this.$store.dispatch('setChannelType',id);
         this.nowIndex = this.$store.state.channelType;
+        this.$router.push({path:`/welcome#${this.nowIndex}`});
       },
       getdetailpage(){
         var operdir = this.$store.state.operdir;
-        console.log(this.$store.state.channelType);
+        var nowChannelIndex;
         if(operdir=='left'){
           this.mySwiper.slideNext();
-          // for(var i=0;i<this.navList.length;i++){
-          //   if(this.$route.path==='/welcome'){
-          //     this.nowIndex = 'recommend';
-          //   }else{
-          //     this.nowIndex = this.$route.path;
-          //   }
-          //   if(this.nowIndex === this.navList[i].path){
-          //     if(i!==this.navList.length){
-          //       this.mySwiper.slideNext();
-          //       return;
-          //     }
-          //   }
-          // }
+          for(var i=0;i<this.navList.length;i++){
+            nowChannelIndex = this.common.getCaption(window.location.href)
+            if((Number(nowChannelIndex)==this.navList[i].id)&&(i<this.navList.length-1)){
+              this.nowIndex = this.navList[i+1].id;
+            }
+          }
         }else if(operdir=='right'){
           this.mySwiper.slidePrev();
-          // for(var i=0;i<this.navList.length;i++){
-          //   if(this.$route.path ==='/welcome'){
-          //     this.nowIndex = 'recommend';
-          //   }else{
-          //     this.nowIndex = this.$route.path;
-          //   }
-          //   if(this.nowIndex === this.navList[i].path){
-          //     // if(i!==0){
-          //       this.mySwiper.slidePrev();
-          //       return;
-          //     // }
-          //   }
-          // }
+          for(var i=0;i<this.navList.length;i++){
+            nowChannelIndex = this.common.getCaption(window.location.href)
+            if((Number(nowChannelIndex)==this.navList[i].id)&&(i>0)){
+              this.nowIndex = this.navList[i-1].id;
+            }
+          }
         }
         
         

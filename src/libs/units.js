@@ -118,5 +118,11 @@ const common = {
   padLeftZero(str){
     return ('00' + str).substr(str.length)
   },
+  //截取字符串中某个字符后面所有内容
+  getCaption(obj){
+    var index=obj.lastIndexOf("\#");
+    obj=obj.substring(index+1,obj.length);
+    return obj;
+  },
 }
 export default common

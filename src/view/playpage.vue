@@ -19,7 +19,7 @@
           <img :src="videoImg" alt="">
           <div class="play-btn"></div>
           <div class="video-play-bottom">
-            <span class="bottom-play"></span>
+            <span class="bottom-play">{{totalTime}}次播放</span>
           </div>
           <div class="bottom-bg"></div>
         </div>
@@ -52,7 +52,7 @@
     </div>
     <div class="open-app-top">
       <div class="open-app-top-banner">
-        <img src="" alt="" class="logo">打开好看APP，查看更多精彩视频
+        <img src="https://pic.rmb.bdstatic.com/baidu-rmb-video-cover-1/2021-2/1614223803372/cf9bb534bb8e.png" alt="" class="logo">打开好看APP，查看更多精彩视频
       </div>
     </div>
     <div class="video-info">
@@ -68,7 +68,7 @@
       <div class="gather-item">
         <div class="item-new-show">
           <span class="icon comment"></span>
-          <span class="text">216</span>
+          <span class="text">评论</span>
         </div>
       </div>
       <div class="gather-item">
@@ -82,6 +82,22 @@
           <span class="icon down"></span>
           <span class="text">下载</span>
         </div>
+      </div>
+    </div>
+    <div class="author-info">
+      <div class="author-info-avatar">
+        <img :src="headImg" alt="">
+      </div>
+      <div class="author-info-content">
+        <div class="author-info-name">{{autor}}</div>
+        <div class="author-info-data"><span class="author-info-fans-num">1663粉丝</span></div>
+      </div>
+      <div class="author-info-attention">+关注</div>
+    </div>
+    <div class="top-video-list-container">
+      <div class="top-video-list-title">猜你喜欢</div>
+      <div class="top-video-list">
+        <div class="top-video-card"></div>
       </div>
     </div>
   </div>
@@ -110,7 +126,8 @@ import {URL} from '@/libs/url'
     },
     methods: {
       getVideoInfo(){
-        var videoid = this.$store.state.videoId;
+        // var videoid = this.$store.state.videoId;
+        var videoid = this.common.getQueryVariable("videoId");
         console.log("视频id",videoid);
         var that = this;
         http({
@@ -126,7 +143,7 @@ import {URL} from '@/libs/url'
           if(res.code==1){
             that.headImg = res.data.HeadImg;
             that.VideoTitle = res.data.Title;
-            that.totalTime = res.data.HeadImg;
+            that.totalTime = res.data.Duration;
             that.autor = res.data.UserName;
             that.videoImg = res.data.CoverImgs;
             // that.videoUrl = res.data.HeadImg;
@@ -252,7 +269,7 @@ import {URL} from '@/libs/url'
           bottom: .29rem;
           display: flex;
           align-items: center;
-          z-index: 98;
+          z-index: 101;
           .bottom-play{
             margin-right: .137rem;
             height: .362rem;
@@ -284,6 +301,7 @@ import {URL} from '@/libs/url'
       left: 0;
       bottom: 0;
       background: #000;
+      z-index:100;
       &.hide{
         display: none;
       }
@@ -309,7 +327,7 @@ import {URL} from '@/libs/url'
           text-align: center;
         }
         .video-player-pause-btns{
-          width: 10rem;
+          width: 5rem;
           margin-top: .58rem;
           padding: 0 2.472rem;
           font-family: PingFangSC-Regular;
@@ -324,7 +342,7 @@ import {URL} from '@/libs/url'
             height: .821rem;
             border-radius: .193rem;
             text-align: center;
-            padding: 0 .362rem;
+            // padding: 0 .362rem;
           }
           .open{
             background: #ff4141;
@@ -333,7 +351,7 @@ import {URL} from '@/libs/url'
             height: .821rem;
             border-radius: .193rem;
             text-align: center;
-            padding: 0 .362rem;
+            // padding: 0 .362rem;
           }
         }
       }
@@ -438,6 +456,7 @@ import {URL} from '@/libs/url'
     overflow: hidden;
     margin: .338rem .362rem .201rem;
     transition: all .2s;
+    text-align:left;
     .video-info-title{
       width: 100%;
       min-height: .66rem;
@@ -522,6 +541,93 @@ import {URL} from '@/libs/url'
         .down{
           background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAMAAABiM0N1AAAAOVBMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADLcPMfAAAAEnRSTlMAeW7HmUYGEDvp+Cis3xpiXon2cWd/AAABf0lEQVRYw+2X247DIAxEIQm3QLj9/8fuAlWVbMCYVJX2gXmtexrGE5sSMjV1k2BuqcjLMQwPe2zoYAMcfURAGx60RlALlkNhTtw1EqRSMbWiIm0SKSAdgmp5sm/FgWQCNXuzpc7hQCyBJARSEzRBE/RfQPxXCFAq48D8MOo9BUFQkTL1IrGdxykClPZA5bH4deI3x3K4lJnexG8PU33deP72QNmelRZ5wEm9lJqQj6B4bVAPrL63XX/NdKAxwLpx3wLJRg+Gj1bMpiMcWjWbLPVutuVbX8jd3NG3H7a3zBCFhLySycxZRe0zm69XCtU6nS097JNPR34Tet4xF4qDK+9MP0RfXEQEM9/abpGuTpOtG+h+drtlFHtHNnDEfcS+lbCVuHb0m4sNSC9u+MjC9SMvEXSCsde67SkfHDTNiKMCjcgdMtCtiJuXT8LEB5vvfBQVmLUyqPhgzdSvFehAV0jmyjEPOWlHna4eaiEfSNDXH+6DCvKhLPOOaTI1BegHWpo1daER9gUAAAAASUVORK5CYII=) no-repeat;
           background-size: cover;
+        }
+      }
+    }
+  }
+  .author-info{
+    display: flex;
+    flex-direction: row;
+    width: 92%;
+    height: .845rem;
+    padding: 0 4%;
+    margin-top: .443rem;
+    .author-info-avatar{
+      position: relative;
+      width: .845rem;
+      height: .845rem;
+      border-radius: 50%;
+      background: #999;
+      img{
+        display: block;
+        width: .845rem;
+        height: .845rem;
+        border-radius: 50%;
+      }
+    }
+    .author-info-content{
+      display: flex;
+      flex-direction: column;
+      margin-left: .193rem;
+      padding-top: .072rem;
+      .author-info-name{
+        height: .362rem;
+        font-family: PingFangSC-Medium;
+        font-size: .362rem;
+        line-height: .362rem;
+        color: #1a1a1a;
+      }
+      .author-info-data{
+        display: flex;
+        flex-direction: row;
+        height: .29rem;
+        line-height: .29rem;
+        margin-top: .121rem;
+        .author-info-fans-num{
+          font-family: PingFangSC-Regular;
+          font-size: .29rem;
+          color: #999;
+          height: .29rem;
+          line-height: .29rem;
+        }
+      }
+    }
+    .author-info-attention{
+      width: 1.449rem;
+      height: .676rem;
+      font-family: PingFangSC-Medium;
+      font-size: .29rem;
+      line-height: .692rem;
+      text-align: center;
+      color: #fff;
+      border-radius: .121rem;
+      background: #ff4141;
+      margin: auto 0 auto auto;
+    }
+  }
+  .top-video-list-container{
+    width: 92%;
+    padding: 0 4%;
+    margin-top: .362rem;
+    .top-video-list-title{
+      font-family: PingFangSC-Medium;
+      font-size: .362rem;
+      height: .435rem;
+      line-height: .435rem;
+      color: #1a1a1a;
+      text-align:left;
+      .top-video-list{
+        display: flex;
+        margin-top: .338rem;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        .top-video-card{
+          flex: 1 1;
+          max-width: 4.541rem;
+          min-width: 4.026rem;
+          margin-bottom: .29rem;
+          overflow: hidden;
+          margin-right: .242rem;
         }
       }
     }

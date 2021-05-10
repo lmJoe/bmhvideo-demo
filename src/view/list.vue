@@ -156,9 +156,11 @@ export default {
         self.getArticleList(done)
       }, 1500)
     },
-    toPlayPage(play){
-      this.$store.dispatch('setVideoId',play);//keycode
-      this.$router.push({name:'playPage'});
+    toPlayPage(videoId){
+      this.$store.dispatch('setVideoId',videoId);//keycode
+      // this.$router.push({name:'playPage'});
+      var channelid = this.common.getCaption(window.location.href)
+      this.$router.push({path:`/playPage#${channelid}`,query:{videoId:videoId}});
     }
   }
 }
