@@ -3,9 +3,6 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-const pathName = 'qkv4' //测试环境
-// const pathName = 'qkv2'//正式环境
-const pathName2 = 'DrawProv2'
 module.exports = {
   dev: {
 
@@ -48,16 +45,12 @@ module.exports = {
   build: {
     //打包一级目录
     // Template for index.html
-    // index: path.resolve(__dirname, `../dist/${pathName}/index.html`),
-    // // Paths
-    // assetsRoot: path.resolve(__dirname, `../dist/${pathName}`),
-    // assetsSubDirectory: 'static',
-    // assetsPublicPath: `/${pathName}/`,//打包二级目录
-    // //打包二级目录
-    index: path.resolve(__dirname, `../dist/${pathName}/${pathName2}/index.html`),
-    assetsRoot: path.resolve(__dirname, `../dist/${pathName}/${pathName2}`),
+    index: path.resolve(__dirname, `../dist//index.html`),
+    // Paths
+    assetsRoot: path.resolve(__dirname, `../dist`),
     assetsSubDirectory: 'static',
-    assetsPublicPath: `/${pathName}/${pathName2}/`,
+    assetsPublicPath: `./`,//打包二级目录
+
 
     /**
      * Source Maps

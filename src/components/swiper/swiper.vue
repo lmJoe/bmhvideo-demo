@@ -57,17 +57,23 @@ import videoList from '../../view/list.vue';
       swiperleft: function () {
         this.$store.dispatch('setOperDir', 'left');
         this.getActive();
+        // debugger
          //当点击导航某个栏目后，在左右滑动时与当前点击导航位相匹配
         var nowChannelIndex = this.common.getCaption(window.location.href);
         //如果当前频道id不为第一个频道的id
-        if(Number(nowChannelIndex)!==1){
-          //获取当前导航中频道id,匹配找到当前id的下标
-          for(var i=0;i<this.navList.length;i++){
-            if(Number(nowChannelIndex)==this.navList[i].id){
-              this.navIndex = i;
-            }
-          }
-        }
+        // if(Number(nowChannelIndex)!==1){
+        //   //获取当前导航中频道id,匹配找到当前id的下标
+        //   for(var i=0;i<this.navList.length;i++){
+        //     if(Number(nowChannelIndex)==this.navList[i].id){
+        //       this.navIndex = i;
+        //     }
+        //   }
+        // }
+        // if(Number(nowChannelIndex)!==1){
+        //   //获取当前导航中频道id,匹配找到当前id的下标
+        //   this.$router.push({path:`/welcome#1`});
+        //   this.navIndex = 1;
+        // }
         if((this.navIndex < this.navList.length-1)&&(this.navIndex>0)){
           var nowNavIndex = this.navIndex++;
           var channelValue = this.navList[nowNavIndex+1].id;
@@ -82,6 +88,7 @@ import videoList from '../../view/list.vue';
         this.$store.dispatch('setOperDir', 'right');
         this.getActive();
         //当点击导航某个栏目后，在左右滑动时与当前点击导航位相匹配
+        
         var nowChannelIndex = this.common.getCaption(window.location.href);
         //如果当前频道id不为第一个频道的id
         if(Number(nowChannelIndex)!==1){

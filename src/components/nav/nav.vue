@@ -51,7 +51,7 @@ import '../../../static/swiper.min.css';
           {name: '秒懂',path:'miaodong',id:9},
         ],
         nowIndex: 1,
-        lotterylistBg:require("../../assets/images/header-logo.jpg"),
+        lotterylistBg:require("../../assets/images/header-logo.png"),
         searchImg:require("../../assets/images/search.png"),
       }
     },
@@ -88,6 +88,9 @@ import '../../../static/swiper.min.css';
           this.mySwiper.slideNext();
           for(var i=0;i<this.navList.length;i++){
             nowChannelIndex = this.common.getCaption(window.location.href)
+            if(nowChannelIndex=='/welcome'){
+              nowChannelIndex = 1;
+            }
             if((Number(nowChannelIndex)==this.navList[i].id)&&(i<this.navList.length-1)){
               this.nowIndex = this.navList[i+1].id;
             }

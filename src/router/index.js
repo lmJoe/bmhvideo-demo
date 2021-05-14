@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
 export default new Router({
-  mode:'history',
+  mode:'hash',
   routes: [
     {
       path: '/',
@@ -23,6 +23,11 @@ export default new Router({
       path: '/playpage',
       name: 'playPage',
       component: resolve=>(require(["@/view/playpage"],resolve)),
+    },
+    {
+      path: '/error',
+      name: 'error',
+      component: resolve=>(require(["@/view/error"],resolve)),
     }
   ]
 })
