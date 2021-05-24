@@ -1,7 +1,4 @@
 const common = {
-  appkey: 'B2A9505CBF4D4E5091DF054C1F490980', // appkey
-  cId: 19, // 渠道标记
-  ai: '7917765ad5c8416999c4d31c1f56aa41', // 应用id
   getQueryVariable(variable){
     const reg = new RegExp("(^|&)" + variable + "=([^&]*)(&|$)", "i");
     const urlObj = window.location;

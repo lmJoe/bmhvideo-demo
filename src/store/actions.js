@@ -1,4 +1,4 @@
-import { SET_USERID, SET_TOKEN, SET_PRODUCTID, SET_VIDEOID,SET_CHANNELTYPE,SET_OPERDIR} from './mutation-types';
+import { SET_USERID, SET_TOKEN, SET_PRODUCTID, SET_VIDEOID,SET_CHANNELTYPE,SET_OPERDIR,SET_CHANNELLIST} from './mutation-types';
 // 给action注册事件处理函数。当这个函数被触发时候，将状态提交到mutations中处理
 export default {
     //获取用户登录信息
@@ -21,5 +21,8 @@ export default {
     // 存储左右滑动判断依据值
     setOperDir({commit}, operdir){
       commit(SET_OPERDIR, {operdir});
+    },
+    setChannelList({commit}, channelList){
+      commit(SET_CHANNELLIST, {channelList});
     },
 }

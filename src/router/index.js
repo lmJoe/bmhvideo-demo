@@ -25,9 +25,9 @@ export default new Router({
       component: resolve=>(require(["@/view/playpage"],resolve)),
     },
     {
-      path: '/error',
-      name: 'error',
-      component: resolve=>(require(["@/view/error"],resolve)),
+      path: '/errorpage',
+      name: 'errorpage',
+      component: resolve=>(require(["@/view/errorpage"],resolve)),
     }
   ]
 })

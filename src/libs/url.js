@@ -1,15 +1,16 @@
-let baseURL,baseURL3;
+let baseURL,baseURL1;
 // baseURL = 'http://192.168.30.31:5002'//本地环境
-baseURL = 'https://push-common.baomihua.com:8081'//测试环境
-// baseURL = 'https://quickvideo.29293.com:9010';//正式环境
-baseURL3 = 'https://push-common.baomihua.com:8081';
+baseURL = 'https://api.mytv365.com:5003'////正式环境
 export var URL = {
   recordUrl: {
     getVideoPageList:
       baseURL +
-      '/api/webvideo/getVideoPageList',//获取抽奖列表 
+      '/api/video/getVideoList',//获取抽奖列表 
     getVideoInfo:
-      baseURL3 +
-      '/api/video/getVideoInfo',//获取抽奖列表 
+      baseURL +
+      '/api/video/getPlayUrl',//获取抽奖列表 
+    getChannelList:
+      baseURL +
+      '/api/video/getClassList',//获取频道列表
   }
 };

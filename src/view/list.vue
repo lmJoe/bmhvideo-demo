@@ -9,15 +9,15 @@
     <div class="video-list">
       <div class="video-list-inner">
         <div class="video-li" v-for="(item,index) in videoList" :key="index">
-          <div class="video-list-item" @click="toPlayPage(item.Video_ID)">
+          <div class="video-list-item" @click="toPlayPage(item.vid)">
             <div class="video-list-item-main">
               <div class="video-list-item-inner">
                 <div class="video-list-item-poster">
-                  <img :src="item.CoverImgs" alt="" usescroll="1" willloadbtn="600" class="video-list-item-poster-img">
+                  <img :src="item.vImg" alt="" usescroll="1" willloadbtn="600" class="video-list-item-poster-img">
                 </div>
                 <div class="video-list-item-status">
                   <div class="video-list-item-poster-shade">
-                    <h4>{{item.Title}}</h4>
+                    <h4>{{item.vtitle}}</h4>
                   </div>
                   <div class="video-list-item-poster-duration">
                     <span class="playNum">{{item.Views}}次播放</span>
@@ -34,21 +34,21 @@
           <div class="video-list-item-tools">
             <div class="video-list-item-author">
               <div class="video-list-item-author-avatar">
-                <img :src="item.HeadImg" alt="">
+                <img :src="HeadImg" alt="">
                 <span class="v-tag"></span>
               </div>
               <div class="video-list-item-author-nickname">
-                <p>{{item.NickName}}</p>
+                <p>{{item.userName}}</p>
                 <div class="item-author-msg">{{item.CompanyName}}</div>
               </div>
             </div>
             <div class="video-list-item-btns">
-              <div class="video-list-item-btns-comment video-icon-btn-comment">
-                <img src="https://hiphotos.baidu.com/fex/pic/item/279759ee3d6d55fb3e46d8f263224f4a21a4dd66.jpg" alt="">
+              <!-- <div class="video-list-item-btns-comment video-icon-btn-comment">
+                <img :src="shareImg" alt="">
                 <span>4</span>
-              </div>
+              </div> -->
               <div class="video-list-item-btns-share video-icon-btn-share">
-                <img src="https://hiphotos.baidu.com/fex/%70%69%63/item/77c6a7efce1b9d16180434b5fddeb48f8d546427.jpg" alt="">
+                <img :src="shareImg" alt="">
                 <span>分享</span>
               </div>
             </div>
@@ -70,6 +70,15 @@ export default {
       noData: false,
       isEmpty: true,
       pageIndex:0,
+      HeadImg:require("../assets/images/user_default.gif"),
+      shareImg:require("../assets/images/share.png"),
+    }
+  },
+  watch:{
+    '$route' (to, from) {
+      if(to.hash !== from.hash){
+        this.getArticleList();//重新加载数据
+      }
     }
   },
   mounted() {
@@ -77,28 +86,18 @@ export default {
   methods: {
     getArticleList(done){
       var that = this;
-      let ts = parseInt(new Date().getTime() / 1000);
-      let rd = that.common.getRandomNum(5, 50);
       let size = 10;
       http({
         //这里是你自己的请求方式、url和data参数
         method: 'POST',
         url:URL.recordUrl.getVideoPageList +
-        "?appKey=" +
-        that.common.appkey +
+        "?classID=" +
+        this.common.getCaption(window.location.href) +
         "&pageSize=" +
         size +
         "&pageIndex=" +
         // that.common.getRandomNum(1, 5) +
-        that.pageIndex +
-        "&classId=" +
-        that.classId+
-        "&ts=" +
-        ts +
-        "&rd=" +
-        rd +
-        "&tk=" +
-        that.$md5(`${ts}_${rd}_${that.common.appkey}_${size}`).toUpperCase(),
+        that.pageIndex,
         data: {},
         //假设后台需要的是表单数据这里你就可以更改
         headers: {
@@ -160,13 +159,14 @@ export default {
       this.$store.dispatch('setVideoId',videoId);//keycode
       // this.$router.push({name:'playPage'});
       var channelid = this.common.getCaption(window.location.href)
-      this.$router.push({path:`/playPage#${channelid}`,query:{videoId:videoId}});
+      // this.$router.push({path:`/playPage#${channelid}`,query:{videoId:videoId}});
+      this.$router.push({path:`/playPage`,query:{videoId:videoId,channelid:this.$store.state.channelType}});
     }
   }
 }
 </script>
 
-<style  lang="less">
+<style  lang="less" scoped>
   .video-list{
     box-sizing: border-box;
     position: relative;
@@ -182,6 +182,7 @@ export default {
         width: 100%;
         padding-top: 56.25%;
         background-color: #999;
+        overflow:hidden;
         .video-list-item-inner{
           position: absolute;
           top: 0;

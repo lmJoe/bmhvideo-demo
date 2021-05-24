@@ -12,9 +12,9 @@
     </div>
     <div class="video-player navigation-normal">
       <div class="video-container">
-        <video src=""></video>
+        <video class="video" id="video" :src="videoUrl" playsinline="" x5-video-player-type="h5-page" controls="controls" autoplay="autoplay" style="object-fit: fill;"></video>
       </div>
-      <div class="video-player-shade">
+      <!-- <div class="video-player-shade">
         <div class="shade-style">
           <img :src="videoImg" alt="">
           <div class="play-btn"></div>
@@ -37,7 +37,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="goods">
       <img src="" class="goods-img" alt="">
@@ -52,27 +52,28 @@
     </div>
     <div class="open-app-top">
       <div class="open-app-top-banner">
-        <img src="https://pic.rmb.bdstatic.com/baidu-rmb-video-cover-1/2021-2/1614223803372/cf9bb534bb8e.png" alt="" class="logo">打开好看APP，查看更多精彩视频
+        <!-- <img src="https://pic.rmb.bdstatic.com/baidu-rmb-video-cover-1/2021-2/1614223803372/cf9bb534bb8e.png" alt="" class="logo"> -->
+        打开好看APP，查看更多精彩视频
       </div>
     </div>
     <div class="video-info">
       <div class="video-info-title">{{VideoTitle}}</div>
-      <div class="video-info-arrow"></div>
-      <div class="video-info-text hide">
+      <!-- <div class="video-info-arrow"></div> -->
+      <!-- <div class="video-info-text hide">
         <p>发布时间：2021年4月29日</p>
         <p>本文仅代表作者观点，不代表百度立场</p>
         <p>本文系作者授权百家号发表，未经许可，不得转载</p>
-      </div>
+      </div> -->
     </div>
     <div class="gather">
-      <div class="gather-item">
+      <!-- <div class="gather-item">
         <div class="item-new-show">
           <span class="icon comment"></span>
           <span class="text">评论</span>
         </div>
-      </div>
+      </div> -->
       <div class="gather-item">
-        <div class="item-new-show">
+        <div class="item-new-show" @click="collectBtn()">
           <span class="icon collect"></span>
           <span class="text">收藏</span>
         </div>
@@ -86,7 +87,7 @@
     </div>
     <div class="author-info">
       <div class="author-info-avatar">
-        <img :src="headImg" alt="">
+        <img :src="HeadImg" alt="">
       </div>
       <div class="author-info-content">
         <div class="author-info-name">{{autor}}</div>
@@ -97,11 +98,11 @@
     <div class="top-video-list-container">
       <div class="top-video-list-title">猜你喜欢</div>
       <div class="top-video-list">
-        <div class="top-video-card">
+        <div class="top-video-card" v-for="(item,index) in likeVideoList" :key=index>
           <div class="top-video-card-img">
             <div class="hk-filter-earlybird">
               <div style="z-index: 1; position: relative;">
-                <img src="https://tukuimg.bdstatic.com/processed/a079ae38f0d1ba6f624bcea93774bf20.jpeg@s_2,w_681,h_381,q_100" alt="">
+                <img :src="item.vImg" alt="">
               </div>
             </div>
             <div class="top-video-card-img-bg">
@@ -115,21 +116,21 @@
               <div class="card-shadow"> </div>
             </div>
           </div>
-          <div class="top-video-card-title">一首《感官先生》唱出随遇而安的人生态度，泰然处之的处世之道</div>
+          <div class="top-video-card-title">{{item.vtitle}}</div>
         </div>
       </div>
     </div>
     <div class="video-relate-list-container">
       <div class="video-relate-list-title">相关推荐</div>
       <div class="video-relate-list">
-        <div class="video-relate-card">
+        <div class="video-relate-card" v-for="(item,index) in likeVideoList" :key=index>
           <div class="video-relate-card-img">
             <div class="hk-filter-earlybird">
               <div style="z-index: 1; position: relative;">
-                <img src="https://tukuimg.bdstatic.com/processed/529ef48fa7979c2844d6fcab6fab3c1e.jpeg@s_2,w_681,h_381,q_100" alt="">
+                <img :src="item.vImg" alt="">
               </div>
               <div class="video-relate-card-img-bg">
-                <div class="video-relate-card-img-title">借酒消愁（DJ沈念完整版）</div>
+                <div class="video-relate-card-img-title">{{item.vtitle}}</div>
                 <div class="video-relate-card-img-play"></div>
                 <div class="video-relate-card-img-bottom">
                   <span class="bottom-play">
@@ -145,32 +146,32 @@
           </div>
           <div class="video-relate-bottom">
             <div class="video-relate-bottom-user">
-              <img src="https://user-center.cdn.bcebos.com/head/raw/uc.101.5764fcac.AMxwYrIqr6GIcy0wTbh8Dg?x-bce-process=image/resize,m_lfit,w_200,h_200&autime=8" alt="">
-              <span>DJ美美</span>
+              <img :src="HeadImg" alt="">
+              <span>{{item.userName}}</span>
             </div>
             <div class="video-relate-bottom-btns">
               <span class="like"><i></i>29</span>
-              <span class="comment"><i></i>3</span>
+              <!-- <span class="comment"><i></i>3</span> -->
               <span class="repley"><i></i></span>
               <span class="more"><i></i><i></i><i></i></span>
             </div>
           </div>
         </div>
       </div>
-      <div class="video-relate-list-more">
+      <!-- <div class="video-relate-list-more">
         <span class="text">点击查看更多</span>
         <span class="icon"></span>
-      </div>
+      </div> -->
     </div>
     <div class="open-app-bottom">
       <div class="open-app-bottom-logo">
-        <img src="https://pic.rmb.bdstatic.com/baidu-rmb-video-cover-1/2021-2/1614223757006/19dffc629111.png" alt="">
+        <img :src="lotterylistBg" alt="">
       </div>
       <div class="open-app-bottom-open">打开</div>
     </div>
     <div class="open-button-wrap">
       <div class="open-app-button">
-        <img src="https://pic.rmb.bdstatic.com/baidu-rmb-video-cover-1/2021-2/1614223803372/cf9bb534bb8e.png" alt="">
+        <!-- <img src="https://pic.rmb.bdstatic.com/baidu-rmb-video-cover-1/2021-2/1614223803372/cf9bb534bb8e.png" alt=""> -->
         打开好看APP，查看全网热门视频
       </div>
     </div>
@@ -186,6 +187,7 @@ import {URL} from '@/libs/url'
         flvid:'',//获取详细视频id
         lotterylistBg:require("../assets/images/header-logo.png"),
         searchImg:require("../assets/images/search.png"),
+        HeadImg:require("../assets/images/user_default.gif"),
         headImg:'',
         VideoTitle:'',
         totalTime:0,
@@ -193,21 +195,27 @@ import {URL} from '@/libs/url'
         autor:'',
         videoUrl:'',
         videoImg:'',
+        pageIndex:0,
+        likeVideoList:[],
+        collectIndex:0,
       }
     },
     mounted() {
+      this.common.getQueryVariable("channelid");
       this.getVideoInfo();
+      this.getArticleList(this.common.getQueryVariable("channelid"));
     },
     methods: {
       getVideoInfo(){
         // var videoid = this.$store.state.videoId;
         var videoid = this.common.getQueryVariable("videoId");
+        
         console.log("视频id",videoid);
         var that = this;
         http({
           //这里是你自己的请求方式、url和data参数
-          method: 'get',
-          url:URL.recordUrl.getVideoInfo+"?videoId="+videoid,
+          method: 'POST',
+          url:URL.recordUrl.getVideoInfo+"?vid="+videoid,
           data: {},
           //假设后台需要的是表单数据这里你就可以更改
           headers: {
@@ -215,13 +223,46 @@ import {URL} from '@/libs/url'
           }
         }).then(function (res) {
           if(res.code==1){
-            that.headImg = res.data.HeadImg;
-            that.VideoTitle = res.data.Title;
-            that.totalTime = res.data.Duration;
-            that.autor = res.data.UserName;
-            that.videoImg = res.data.CoverImgs;
-            // that.videoUrl = res.data.HeadImg;
+            // that.headImg = res.data.HeadImg;
+            that.VideoTitle = res.data.vtitle;
+            // that.totalTime = res.data.Duration;
+            // that.autor = res.data.UserName;
+            // that.videoImg = res.data.CoverImgs;
+            that.videoUrl = res.data.PlayUrl;
           }
+        }).catch(function (err) {
+          console.log(err);
+        });
+      },
+      collectBtn(){
+        if(this.collectIndex==0){
+          this.collectIndex = 1;
+        }else{
+          this.collectIndex = 0;
+        }
+        
+      },
+      getArticleList(channelid){
+        var that = this;
+        let size = 4;
+        http({
+          //这里是你自己的请求方式、url和data参数
+          method: 'POST',
+          url:URL.recordUrl.getVideoPageList +
+          "?pageSize=" +
+          size +
+          "&pageIndex=" +
+          that.common.getRandomNum(1, 2)+
+          "&classID=" +
+          channelid,
+          data: {},
+          //假设后台需要的是表单数据这里你就可以更改
+          headers: {
+            "Content-Type":"application/x-www-form-urlencoded",
+          }
+        }).then(function (res) {
+          var data = res.data;
+          that.likeVideoList = data;
         }).catch(function (err) {
           console.log(err);
         });
@@ -230,7 +271,7 @@ import {URL} from '@/libs/url'
   }
 </script>
 
-<style  lang="less">
+<style  lang="less" scoped>
 .playPage{
   background:#fff;
   .navTop{
@@ -308,6 +349,7 @@ import {URL} from '@/libs/url'
       .video {
         width: 100%;
         height: 100%;
+        object-fit: fill;
       }
     }
     .video-player-shade{
@@ -360,8 +402,6 @@ import {URL} from '@/libs/url'
             z-index: 97;
             height: 1.763rem;
             width: 100%;
-            background-image: -webkit-gradient(linear,left top,left bottom,from(transparent),color-stop(70%,#000));
-            background-image: -webkit-linear-gradient(top,transparent,#000 70%);
             background-image: linear-gradient(180deg,transparent,#000 70%);
             opacity: .7;
           }
@@ -609,11 +649,11 @@ import {URL} from '@/libs/url'
           margin-left: .145rem;
         }
         .collect{
-          background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAMAAABiM0N1AAAAP1BMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC6E+JdAAAAFHRSTlMAwmZ03ShKGQv2g1iTOeu2BM+grKktUuIAAAImSURBVFjD7VfbloMgDCx3QcAb//+tW2C1oCjB9mXPNk+KMiaTZIKPx9e+9resY2L8AAqZnHMS9W9iGep+DYl3cLh0m1l2H0dYl9jU3QYaAsCMcbzQtwPzu6Xxlzhc3gxuDET38Ub56+EeDgnJWssgRW1kOmSMZXHSO3wvO34D4eom0zbxgMlbfEdOcLoU+W5plc6QxaZMp9h0xgYCxno9bX1h8mf9ui6R4petxxRNe4Lsn+v0KVWnWESmL0pyLK0MydmTskrfsgMpfk8oJK98Dv5sXa7xVZJHhueNAX5WyFSZevE+kya4ju+PZYdQQwsIWnYJeWaa5JSVNcpX4NJW/dOhZr3Jdgn0QUyHVdouXOUtS6Enrq0v60pYpg1sM5sJ306h4SMnZr9EhnEtetNN7rRecJxisMmAQl/z8tMggTBZDqk5HyqzO+jrlVCQc4eHs5YuCYWuUlibXlEoFkBSyTXQDBGKML3merPWZy4qtvRBKDRIG4Z6s9YVx9ZDAzj9rABATfpqpNVeBJSkL0dZPQ8DKjLUYy1rHKBvuCxEhZfE+x+LCnDt9sggx8kCkZ3ZTV9IQoJHKdDYBwkb+H4yYohCbPELsh0XKO4yHmtaw5IRwObswGS1eP2hyA7Sa45yIWJMuS28E9jCpJ0fdg/8iAk5Jqt8hw5bTB4lRNczpIRhoV4/bxKE8/w8WmPKC3GNcIEf/0VPSC/K67zpNPaB//Ov/Sf7AUInOdVl7e47AAAAAElFTkSuQmCC) no-repeat;
+          background: url("../assets/images/collect.png") no-repeat;
           background-size: cover;
         }
         .down{
-          background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAMAAABiM0N1AAAAOVBMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADLcPMfAAAAEnRSTlMAeW7HmUYGEDvp+Cis3xpiXon2cWd/AAABf0lEQVRYw+2X247DIAxEIQm3QLj9/8fuAlWVbMCYVJX2gXmtexrGE5sSMjV1k2BuqcjLMQwPe2zoYAMcfURAGx60RlALlkNhTtw1EqRSMbWiIm0SKSAdgmp5sm/FgWQCNXuzpc7hQCyBJARSEzRBE/RfQPxXCFAq48D8MOo9BUFQkTL1IrGdxykClPZA5bH4deI3x3K4lJnexG8PU33deP72QNmelRZ5wEm9lJqQj6B4bVAPrL63XX/NdKAxwLpx3wLJRg+Gj1bMpiMcWjWbLPVutuVbX8jd3NG3H7a3zBCFhLySycxZRe0zm69XCtU6nS097JNPR34Tet4xF4qDK+9MP0RfXEQEM9/abpGuTpOtG+h+drtlFHtHNnDEfcS+lbCVuHb0m4sNSC9u+MjC9SMvEXSCsde67SkfHDTNiKMCjcgdMtCtiJuXT8LEB5vvfBQVmLUyqPhgzdSvFehAV0jmyjEPOWlHna4eaiEfSNDXH+6DCvKhLPOOaTI1BegHWpo1daER9gUAAAAASUVORK5CYII=) no-repeat;
+          background: url("../assets/images/down.png") no-repeat;
           background-size: cover;
         }
       }
@@ -707,8 +747,10 @@ import {URL} from '@/libs/url'
           position: relative;
           overflow: hidden;
           border-radius: .121rem;
-          width: 100%;
-          height: 2.56rem;
+          img{
+            width: 100%;
+            height: 2.56rem;
+          }
           .hk-filter-earlybird{
             filter: sepia(.25) contrast(1.25) brightness(1.15) saturate(.9) hue-rotate(-5deg);
             position: relative;
@@ -800,6 +842,7 @@ import {URL} from '@/libs/url'
           color: #1a1a1a;
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 2;
+          text-align:left;
         }
       }
     }
@@ -968,7 +1011,7 @@ import {URL} from '@/libs/url'
                 width: .435rem;
                 height: .435rem;
                 margin-right: .032rem;
-                background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAMAAAC7m5rvAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAA8UExURUdwTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIev/tYAAAATdFJOUwAqCoJb8RhIwTjQqm35m7jieYnszPMsAAABhUlEQVRIx+WW2XqDIBBGhQwiO8r7v2vDaMvikqFf7/pfkeCR2XGa/lqz3fwKbAziPu0KcgQL6UeWTkFKv+HwMCF2TMxULAPh7SHEzG3UgOSHV4xnfoGmBr+49MrLeQADXKq8JCaBFWwexWRxE2iYzM+q3t6PWksc2ICR+v1orA5mdNf8vrbkBHBdGWZydcFbkvHnpC2pqoxYStoZdX8UYAE7VpVZkTmfyMCuaziqfv1+i2g53bkJsd715X/XcktjWqi3XN2YnO1SVp+admkcuEvThk1b3HtRoCMbpdKwF5NRUErxoaF8M3B8U8EPVfcTlDwTHadgph4R4fhBO03XcVwoGCbfDGOySRwZM00XUTG0cZlGsdZGMtbaSMU6G6kYdA1AxDobiRjWcZhGMd/PZxKGm3EaxJQ4XeM4Qp+xndLnGSGfMIuUaOcF3piR3WEc9pnl5EX3JRcwMf7VaPPLMSnd6ZZT3Qy9klAfvnou5S8vKxmfmPu7htsQr0x1UXsgfz39X30B+Ao2FkNbeU0AAAAASUVORK5CYII=);
+                background-image: url(../assets/images/dianzan.png);
                 background-size: cover;
               }
             } 
@@ -986,7 +1029,7 @@ import {URL} from '@/libs/url'
                 width: .435rem;
                 height: .435rem;
                 margin-right: .032rem;
-                background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAMAAAC7m5rvAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAABCUExURUdwTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHPTtPsAAAAVdFJOUwC3pR55OysGE/eWxUfi7oTUVmjpbwuMR/IAAAGTSURBVEjH7ZZJloAgDEQZlEFRnLj/VftJAEEUobfdWfMhhqpChP5kcfoLiGFpJBGNVC/NWTtra3AxUHPfdJjxJVu44yS0bVSqeqw7Aa5aOcBQP9tG10aslfMYYrvltkYMsclyRyOGKHBdBSWGC/OcLiP0GGEOHkMCJDMURLWNQR8B++TUdEFmiZqGzchzeziCzBiL33P8wWGzVz05FLst4LAl5i+UHBR//OpnzlH41ZecQO8JJ+wwZFF8JL+/ocaSsCjKF1VnZMtFq8Y6uVqpqjQ6xjrKiNfDCy1GUuEy1VLpAhaR9vhhYHfdEQU9lxPfiXKM0/3caEoWUZqmv7NOKq09+tJeY3DPHsWjM/jNAEEzdNgv51znuxi62VS4idBBxoYL7nZheQ8hBgm6pVDAINLzSdv5d8HaEmuNL2yVL94Q0QmT7nmSk5t5fT7CQfvGb/HaFR5HnyLXU+0xXXyK2amBZc3CHMQ7vQuIKpZZRGTi/arVflEuw4+iYbSYt/wqaEeRJsqZUurmv6dek46h/6qtH1MRMHiaK3pQAAAAAElFTkSuQmCC);
+                background-image: url(../assets/images/share.png);
                 background-size: cover;
               } 
             }
@@ -1101,6 +1144,7 @@ import {URL} from '@/libs/url'
     z-index: 9998;
     width: 100%;
     text-align: center;
+    display:none;
     &.hide {
       display: none;
     }

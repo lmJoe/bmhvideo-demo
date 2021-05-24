@@ -15,7 +15,7 @@
     },
     data() {
       return {
-        
+        navList:[],
       }
     },
     mounted() {

@@ -9,7 +9,7 @@ function loadLocal() {
     productId:'',
     videoId:'',
     channelType:'',
-    operdir:'',
+    channelList:'',
   }
   
   export default state

@@ -6,4 +6,5 @@ export default{
     videoId:state => state.videoId,
     channelType:state => state.channelType,
     operdir:state => state.operdir,
+    channelList:state => state.channelList,
 }

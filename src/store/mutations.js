@@ -1,4 +1,4 @@
-import { SET_USERID, SET_TOKEN, SET_PRODUCTID, SET_VIDEOID,SET_CHANNELTYPE,SET_OPERDIR} from './mutation-types';
+import { SET_USERID, SET_TOKEN, SET_PRODUCTID, SET_VIDEOID,SET_CHANNELTYPE,SET_OPERDIR,SET_CHANNELLIST} from './mutation-types';
 export default {
   //获取用户数据
   [SET_USERID](state,{userId}){
@@ -43,4 +43,12 @@ export default {
       state.operdir = {};
     }
   },
+  [SET_CHANNELLIST](state,{channelList}){
+    if(channelList){
+      state.channelList = channelList
+    }else{
+      state.channelList = {};
+    }
+  },
+  
 }
